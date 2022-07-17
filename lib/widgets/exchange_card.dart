@@ -13,10 +13,10 @@ class ExchangeCard extends GetView<HomePageController> {
 
   Align _buildExchangeIcon() {
     return Align(
-      alignment: const Alignment(.7, 0),
+      alignment: AppSize.exchangeCardSwapButtoAlignment,
       child: GestureDetector(
         child: CircleAvatar(
-          radius: 20,
+          radius: AppSize.exchangeCardSwapButtonSize,
           backgroundColor: Colors.white,
           child: SvgPicture.asset(
             AppIcon.exchange,
@@ -58,14 +58,16 @@ class ExchangeCard extends GetView<HomePageController> {
                 style: Get.textTheme.bodyText2,
               ),
               TextField(
+                autofocus: false,
                 controller: controller.baseTextEditingController,
                 style: Get.textTheme.headline1,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                 ),
                 onChanged: controller.onChangeInput,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
               ),
               Obx(
                 () => Text(
@@ -129,6 +131,7 @@ class ExchangeCard extends GetView<HomePageController> {
                 UiStrings.exchangeCardYouGet,
               ),
               TextField(
+                autofocus: false,
                 controller: controller.quoteTextEditingController,
                 style: Get.textTheme.headline1,
                 decoration: const InputDecoration(

@@ -6,6 +6,7 @@ import 'package:swap/model/current_holding.dart';
 import 'package:swap/services/woo_service.dart';
 
 class HomePageController extends GetxController {
+  late Timer timer;
   late TextEditingController baseTextEditingController;
   late TextEditingController quoteTextEditingController;
   RxString baseSymbol = 'BTC'.obs;
@@ -96,9 +97,16 @@ class HomePageController extends GetxController {
   @override
   void onReady() {
     unawaited(getAsset());
-    Timer.periodic(const Duration(seconds: 10), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 10), (timer) {
       unawaited(getExchangeRate());
     });
+
     super.onReady();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 }
